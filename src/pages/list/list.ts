@@ -1,37 +1,78 @@
-import { Component } from '@angular/core';
+import { Component,QueryList,ViewChildren} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { PlayListPage} from '../play-list/play-list';
+import { PlayerPage} from '../Player/Player';
 
+import { TrackController} from '../../shared/Data';
+import { Track, TrackResult } from '../../shared/shared';
+import { Navbar } from 'ionic-angular/components/toolbar/navbar';
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
+  directives : [PlayerPage];  
+  @ViewChildren('cmp') components:QueryList<PlayerPage>;
+  name: string = '';
+  searchquery: string;
+  _timeout: any = null;
+  title:string = "Posts";
+  
   selectedItem: any;
   icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
 
+  trackresult:TrackResult;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+    this.name = navParams.get("searchquery");
+    this.loadlist();
+ 
+  }
+   
+  stopall(): void {
+    //this.myService.myHTTPCall().subscribe((event) => {
+      this.components.forEach((child) => {
+        console.log('stopping'+child.CurrentTrack.title);
+        child.stop(); })
+    //})
+  }
+  loadlist(page:number=1){
+    this.searchquery = this.name;
+    
+  if(this.searchquery!=null&& this.searchquery.length>0)
+  { 
+    let tr = new TrackResult(7,page);
+    let tc = new TrackController();
+    this.trackresult = tc.getPosts(tr);
+  }
+  }
 
-    // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
+  displayName() {
+    
+    if(this._timeout){ //if there is already a timeout in process cancel it
+      window.clearTimeout(this._timeout);
     }
-  }
+    this._timeout = window.setTimeout(() => {
+       this._timeout = null;
+        this.loadlist();
+    },3000);
+ }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ListPage, {
-      item: item
-    });
-  }
+ openplayer(track) {
+   //demo should use trackifd
+  let trackindex = this.trackresult.tracks.findIndex(
+    mytrack => mytrack.title === track.title
+  );
+  this.navCtrl.push(PlayListPage,{tracks:this.trackresult.tracks, current:trackindex});
+}
+
+getindex(track) : Number{
+  let trackindex = this.trackresult.tracks.findIndex(
+    mytrack => mytrack.title === track.title
+  );
+  return trackindex;
+}
+
+notify(e)
+{ this.stopall();
+}
 }

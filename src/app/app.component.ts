@@ -4,10 +4,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { NewPostPage } from '../pages/NewPost/NewPost';
+import { RecordPage } from '../pages/Record/Record';
+import { PlayerPage } from '../pages/player/player';
 import { ListPage } from '../pages/list/list';
 
+import { Keyboard } from '@ionic-native/keyboard';
+
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [Keyboard]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -16,13 +22,16 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public keyboard:Keyboard) {
     this.initializeApp();
 
+    
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Posts', component: ListPage },
+      { title: 'New Post', component: NewPostPage }
+      
     ];
 
   }
@@ -33,6 +42,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.keyboard.onKeyboardShow().subscribe(data => {
+        document.body.classList.add('keyboard-is-open');        
+     }); 
+     this.keyboard.onKeyboardHide().subscribe(data => {
+      document.body.classList.remove('keyboard-is-open');        
+   }); 
+   
     });
   }
 

@@ -1,0 +1,125 @@
+/* The actual timeline (the vertical ruler) */
+.comment .timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 ;
+    
+}
+
+/* The actual timeline (the vertical ruler) */
+.comment .timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #bbc2ce;
+    top: 0;
+    bottom: 0;
+    left: 0px;
+    margin-left: -20px;
+}
+
+/* Container around content */
+.comment .container {
+    padding: 10px 0px ;
+    position: relative;
+    background-color: inherit;
+    width: 100%;
+}
+
+/* The circles on the timeline */
+.comment .container::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 0px;
+    background-color: gray;
+    border: 2px solid white;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+
+/* Place the container to the right */
+.comment .right {
+    left: 0;
+}
+
+
+/* Add arrows to the right container (pointing left) */
+// .right::before {
+//     content: " ";
+//     height: 0;
+//     position: absolute;
+//     top: 22px;
+//     width: 0;
+//     z-index: 1;
+//     left: 30px;
+//     border: medium solid white;
+//     border-width: 10px 10px 10px 0;
+//     border-color: transparent white transparent transparent;
+// }
+
+/* Fix the circle for containers on the right side */
+.comment .right::after {
+    left: 2px;
+}
+
+/* The actual content */
+.comment .content {
+    padding: 0px 0px 0px 0px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+
+  /* Place the timelime to the left */
+  .comment .timeline::after {
+    left: 31px;
+  }
+  
+  /* Full-width containers */
+  .comment .container {
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 10px;
+  }
+  
+  /* Make sure that all arrows are pointing leftwards */
+//   .container::before {
+//     left: 60px;
+//     border: medium solid white;
+//     border-width: 10px 10px 10px 0;
+//     border-color: transparent white transparent transparent;
+//   }
+
+  /* Make all right containers behave like the left ones */
+  .right {
+    left: 0%;
+  }
+
+
+.comment .timeline img{max-width: 10%;
+    border-radius: 50%;
+    float: left;}
+
+    .comment .commentdata{display: table-cell;padding: 0 0px 10px 4px; border-bottom:solid 1px #eee}
+
+    .comment ion-icon.make-bigger-icon{font-size: 35px !important;
+    margin-top: -7px;}
+    //before ion icon to avoid overwrite
+    .comment .timeline .footer ion-icon{ font-size:22px; padding:0 4px; color:#bbc2ce;}
+.comment .content{height:100px;}
+.comment .commenttext{height:40px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;}
+    .commentnumber{vertical-align: top;
+        color: #bbc2ce;
+        font-size: small;
+        font-weight: bold;}
+
+        

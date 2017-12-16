@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{statusname}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="pagegrid" id="pagegrid" >
+        <ion-row class="v-20 m-h-200 hide-keyboard" #instructions *ngIf="recordStatus<3">
+          <ion-col text-center>
+  <div *ngIf="recordStatus==0" >
+    <h3 *ngIf="recordStatus<1" >Instructions</h3>
+    <div class="content p-l-20" >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </div>
+  </div>
+  <div *ngIf="recordStatus>0 && recordStatus<3" >
+      <h3>Instructions For Recording</h3>
+      <span class="content" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </span>
+  </div>
+  </ion-col>
+  </ion-row>
+  <ion-row #form class="v-30 " *ngIf="recordStatus<3">
+      <ion-col >
+        <ion-item>
+          <ion-label><ion-icon name="create"></ion-icon> </ion-label>
+          <ion-input type="text" (blur)="nottyping()" (focus)="typing()" [(ngModel)]="newtrack.title" placeholder="Title of the post" value=""></ion-input>
+        </ion-item>
+
+        <ion-item >
+            <ion-label><ion-icon name="link"></ion-icon> </ion-label>
+            <ion-input type="text"  (blur)="nottyping()" (focus)="typing()" [(ngModel)]="newtrack.link" placeholder="Link to the post" value=""></ion-input>
+          </ion-item>
+    
+      </ion-col>
+      </ion-row>
+
+        <ion-row class="v-40 hide-keyboard"   *ngIf="recordStatus<3">
+            <ion-col >
+       <recorder style="width:100%" (notify)="notify($event)"></recorder>
+            </ion-col>
+          </ion-row>
+          <ion-row class="v-10"  *ngIf="recordStatus<3">
+            <ion-col>
+                <button  *ngIf="recordStatus==2" class="roundbutton" (click)="submit()" 
+                ion-button round 
+                primary icon-end>Submit<ion-icon name="save"></ion-icon></button>
+            </ion-col>
+            </ion-row>
+            <ion-row class="v-10"  *ngIf="recordStatus==3"  class="container">
+                <ion-col>
+                    <postconfirmation class="sub-container v-100" ></postconfirmation>
+                </ion-col>
+                </ion-row>
+    </ion-grid>
+      
+</ion-content>

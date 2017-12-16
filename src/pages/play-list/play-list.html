@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Play List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div class="" >
+        <player *ngIf="Tracks!=null && Tracks.length > 0" [Tracks]='Tracks' [CurrentTrackIndex]='CurrentTrackIndex' ></player>
+        
+        <div class="controls" text-center>
+        <button  class="roundbutton" (click)="openrecorder()" *ngIf="recordStatus==0" ion-button round 
+            primary icon-end>
+                  Sart Recording<ion-icon  name="mic"></ion-icon>
+                </button>
+                <button  class="roundbutton" (click)="openrecorder()" *ngIf="recordStatus==1" 
+                ion-button round primary icon-end>
+                    Stop Recording<ion-icon  name="pause"></ion-icon>
+                      <span class="timer">{{durationtext}}</span>
+                  </button>
+                  <button  class="roundbutton" (click)="openrecorder()" *ngIf="recordStatus==2" 
+                  ion-button round primary icon-end>
+                      Cancel Recording<ion-icon  name="close"></ion-icon>
+                    </button>
+        </div>
+
+      </div>
+
+</ion-content>

@@ -1,0 +1,21 @@
+
+
+        <player *ngIf="Tracks!=null && Tracks.length > 0" [Tracks]='Tracks' [CurrentTrackIndex]='CurrentTrackIndex' [isLocal]='true' ></player>
+        
+        <div class="controls" text-center>
+            <button  class="roundbutton" (click)="openrecorder()" *ngIf="recordStatus==0" ion-button round 
+            primary icon-end>
+                  Start Recording<ion-icon  name="mic"></ion-icon>
+                </button>
+                <button  class="roundbutton" (click)="openrecorder()" *ngIf="recordStatus==1" 
+                ion-button round primary icon-end>
+                    Stop Recording<ion-icon  name="pause"></ion-icon>
+                      <span class="timer">{{durationtext}}</span>
+                  </button>
+                  <button  class="roundbutton" (click)="openrecorder()" *ngIf="recordStatus==2" 
+                  ion-button round 
+                  primary icon-end>
+                      Cancel Recording<ion-icon  name="close"></ion-icon>
+                    </button>
+        </div>
+

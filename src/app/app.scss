@@ -14,3 +14,176 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+//set the toolbar style
+
+
+.toolbar * {
+    background-color: #42710f;
+    color: #fff;
+}
+.welcomelogo {
+    padding: 40px;
+    padding-top:20px;
+ }
+
+ 
+ .swiper-slide {font-size: map-get($text, fontsize); }
+
+.swiper-pagination-bullet-active{
+    background-color: map-get($colors, primary);
+}
+.homesearch{
+    padding-top:30px;
+}
+.roundinput {
+    border-radius: 50px;
+    margin-bottom: 10px;
+    // border: solid #eee .7px;
+    // background-color: #f3f7fb;
+    border: solid #eee .5px;
+    background-color: #eee;
+    font-size: 12px;
+    max-height: 4.4rem;
+    min-height: 3rem;
+}
+.roundinput ion-icon{
+font-size:1.7em;
+padding-top:4px;
+}
+.roundbutton {
+    border-radius: 50px;
+    margin-bottom: 10px;
+    border: solid #41710f .7px;
+    height: 30px;
+    min-height:30px;
+    font-size: 12px;
+    width:auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+    
+}
+// .roundinput.item-block{min-height: 3rem;}
+.homesearch .roundbutton{
+    margin-top:25px;
+}
+
+ion-app.md {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    line-height: 20px;
+}
+.instructions {padding:20px;}
+
+input[type="range"]{ background: #41710f;}
+.controls div{width:15%; margin-left:10px; display:inline-block;}
+.controls img{width:28px;     margin: auto;}
+.controls{ margin-left: 4px;}
+.button-outline{border-style:solid; border-width:1px;}
+
+.range-bar{top: 20px;
+    height: 4px;}
+.range-md .range-knob-min.range-knob-min .range-knob{
+    background:#41710f;
+}
+
+.container {
+    display: flex;
+    height:100%; 
+    flex-wrap: wrap;
+  }
+  .sub-container{
+    width: 100%;  
+    margin: auto;  
+    vertical-align: middle;
+    
+  }
+  .v-10{
+      height: 10%;
+  }
+  .v-20{
+    height: 20%;
+}
+.v-30{
+    height: 30%;
+}
+.v-40{
+    height: 40%;
+}
+.v-50{
+    height: 50%;
+}
+.v-60{
+    height: 60%;
+}
+.v-70{
+    height: 70%;
+}
+.v-80{
+    height: 80%;
+}
+.v-90{
+    height: 90%;
+}
+.v-100{
+    height: 100%;
+}
+.homelogo{    max-height: 100%;}
+.v-bottom {vertical-align: bottom;}
+.v-center{vertical-align: middle;}
+.p-l-20{padding-left:20px;}
+.m-h-200{max-height: 200px;}
+.p-5{padding:5px;}
+.keyboard-is-open .hide-keyboard{display: none;}
+
+.verylargeicon{font-size: 10em; color: map-get($colors, valid);}
+
+[icon-left] ion-icon, [icon-start] ion-icon {
+    left: 10px;
+    position: absolute;
+}
+.w-p-40{width:40%;}
+// .m-a{margin:auto;}
+.inline{display: inline-block;}
+
+.pagegrid{height:100%;border:none;justify-content: center;}
+.pagegrid ion-col{border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.nopadding{padding-bottom:0px !important;}
+.scroll-content{padding-bottom:0px !important;}
+.text1line{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.text1line-scroll{
+    overflow: scroll;
+    white-space: nowrap;
+}
+.subtext{color:gray; padding:2px;}
+.smallfont{font-size :xx-small;}
+.playercard{ max-width: 400px;
+    margin: auto;
+    margin-bottom: 10px;}
+
+.slide-zoom h3{
+    margin:initial
+}
+.swiper-wrapper{
+    height:85%;
+}
+
+@media screen and (max-height: 400px) {
+    .swiper-pagination{display:none;}
+}
+@media screen and (min-height: 400px) {
+    .homelogo{    min-height: 50px;}
+}
+.alternate{background-color:#f3f7fb;}
+.link{text-decoration: underline;}

@@ -3,12 +3,44 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Posts</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
+<ion-content class="container">
+  <div class="p-5">
+    <ion-item class="roundinput sub-container">
+        <ion-label><ion-icon name="search"></ion-icon> </ion-label>
+        <ion-input type="text" (ngModelChange)="displayName()" [(ngModel)]="name" placeholder="search posts and others" ></ion-input>
+    </ion-item>
+    </div>
+    <ion-grid *ngIf="trackresult!=null" class="tbl">
+        <ion-row class="header">
+            <ion-col col-5><ion-label class="" >Title</ion-label></ion-col>
+            <ion-col col-5><ion-label class="" >Posted By</ion-label></ion-col>
+            <ion-col col-2></ion-col>
+          </ion-row>
+      <ion-row *ngFor="let Track of trackresult.tracks"  [ngClass]="{'alternate':Track. even }">
+       <ion-col col-5><ion-label (click)="openplayer(Track)" class="link" >{{Track.title}}}</ion-label></ion-col>
+        <ion-col col-5><ion-label class="" >{{Track.manager}}</ion-label></ion-col>
+        <ion-col col-2 text-center class="f-s-b">
+            <player #cmp [Tracks]='trackresult.tracks' [CurrentTrackIndex]='getindex(Track)' [IsMicro]="true" (notify)="notify($event)"></player>
+          
+        </ion-col>
+      </ion-row>
+      <ion-row class="paging">
+        <ion-col col-12 text-center>
+            <ion-badge class="inline" *ngIf="trackresult.page-5>0"><ion-icon name="ios-arrow-back" (click)="loadlist(trackresult.page-5)" ></ion-icon></ion-badge>
+          <div *ngFor="let page of trackresult.pages" class="inline">
+            <ion-badge *ngIf="(trackresult.page==1 && page<6) || (page > trackresult.page-3 && page< trackresult.page+3)" (click)="loadlist(page)" >
+              {{page}}</ion-badge>
+            </div>
+            <ion-badge class="inline" *ngIf="trackresult.pages.length>trackresult.page+5"><ion-icon name="ios-arrow-forward" (click)="loadlist(trackresult.page+5)" ></ion-icon></ion-badge>
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  <ion-list class="sub-container v-80">
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon [name]="item.icon" item-start></ion-icon>
       {{item.title}}

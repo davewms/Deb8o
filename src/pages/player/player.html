@@ -1,0 +1,52 @@
+<div *ngIf="Tracks!=null && Tracks.length > 0 && CurrentTrackIndex >-1">
+    <ion-icon  *ngIf="!isPlaying && IsMicro" name="ios-arrow-dropright-outline"  (click)="play()"></ion-icon>
+    <ion-icon  *ngIf="isPlaying && IsMicro" name="ios-pause-outline" (click)="pause()"></ion-icon>
+    
+    <ion-card class="playercard" *ngIf="!IsMicro" >
+        <div>
+                <ion-range min="0" max="100" *ngIf="CurrentTrack!=null" 
+                debounce="300" (ionBlur)="seek($event)"
+                 [(ngModel)]="CurrentTrack.positionpercent" color="primary">
+                        <ion-label small range-left>{{CurrentTrack.start}}</ion-label>
+                        <ion-label small range-right>{{CurrentTrack.end}}</ion-label>
+                      </ion-range>
+            </div>
+            <div class="controls">
+                <div><img src="assets/imgs/collapse.png" *ngIf="CurrentTrack.comments!=null && CurrentTrack.comments.length>0 && showcomments" (click)="expand()">
+                    <img src="assets/imgs/expand.png" *ngIf="CurrentTrack.comments!=null && CurrentTrack.comments.length>0 && !showcomments" (click)="expand()">
+                </div>
+                <div><img src="assets/imgs/previous.png"  *ngIf="CurrentTrackIndex>0" (click)="previous()"></div>
+                <div><img src="assets/imgs/play.png" *ngIf="!isPlaying" (click)="play()" >
+                    <img src="assets/imgs/pause.png"  *ngIf="isPlaying" (click)="pause()" >
+                </div>
+                <div><img src="assets/imgs/next.png" *ngIf="CurrentTrackIndex<Tracks.length-1"  (click)="next()" >
+                    <img src="assets/imgs/cancel.png" *ngIf="islocal"  (click)="delete()" >
+                </div>
+                <div><img src="assets/imgs/comment.png" *ngIf="!isLocal"   ></div>
+            </div> 
+            
+</ion-card>
+<ion-card *ngIf="showcomments && CurrentTrack.comments.length > 0 && !IsMicro">
+<h1 class="text1line">{{CurrentTrack.title}}</h1>
+<div class="subtext"><i>{{CurrentTrack.timespan}}</i></div>
+       <div class="comment">
+<div class="timeline">
+        <div class="container right "  *ngFor="let comment of CurrentTrack.comments">
+          <div class="content">
+            <img src="{{comment.img}}"> 
+            <div class="commentdata">
+            <h1>{{comment.username}}</h1>
+            <p class="commenttext">{{comment.text}}</p>
+        <div class="footer"><ion-icon name="md-chatbubbles" class="" left></ion-icon> <span class="commentnumber" *ngIf="comment.replies.length > 0">{{comment.replies.length}}</span>
+            <ion-icon name="md-arrow-dropdown" class="make-bigger-icon" float-right></ion-icon>
+             <ion-icon name="ios-undo"  float-right></ion-icon>
+           
+        </div>    
+        </div>
+          </div>
+        </div>
+      
+    </div>  
+</div>
+</ion-card>
+</div>
